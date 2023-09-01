@@ -1,8 +1,8 @@
-const title = 'React Three Next Starter'
+const title = 'Creative Transmissions'
 const url = 'https://react-three-next.vercel.app/'
-const description = 'The easiest and fastest way to create a 3D website using React Three Fiber and NextJS'
+const description = 'Full Stack Development Services. 3D, Web, VR, and Blockchain'
 const author = 'Author'
-const twitter = '@pmndrs'
+const twitter = '@Create_Transmit'
 
 export default function Head() {
   return (
@@ -20,7 +20,7 @@ export default function Head() {
       <meta name='description' content={description} />
       <meta
         name='keywords'
-        content='Software Engineer,Product Manager,Project Manager,Data Scientist,Computer Scientist'
+        content='Web Developer, JavaScript, WebXR, Web3, Blockchain, React, ThreeJS, NextJS, Vercel, Full Stack, Creative Transmissions'
       />
       <meta name='robots' content='index,follow' />
       <meta name='distribution' content='web' />
