@@ -29,7 +29,7 @@ export default function Page() {
                 {/* jumbo */}
                 <div className='flex w-full flex-col items-start justify-center p-12 text-center md:w-2/5 md:text-left'>
                     <h1 className='my-4 text-5xl font-bold leading-tight'>Contact</h1>
-                    <p className='mb-8 text-2xl leading-normal'>Let's work together!</p>
+                    <p className='mb-8 text-2xl leading-normal'>Let&aposs work together!</p>
                 </div>
             </div>
         </>

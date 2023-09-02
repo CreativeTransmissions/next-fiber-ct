@@ -32,7 +32,7 @@ export default function Page() {
                 <div className='flex w-full flex-col items-start justify-center p-12 text-center md:w-2/5 md:text-left'>
                     <h1 className='my-4 text-5xl font-bold leading-tight'>About</h1>
                     <p>Hi 👋😃</p>
-                    <p>I'm Andrew, a full stack software developer who has been writing code ever since I first laid hands on a computer in the 90s.</p>
+                    <p>I&aposm Andrew, a full stack software developer who has been writing code ever since I first laid hands on a computer in the 90s.</p>
                     <p></p>
 
 
