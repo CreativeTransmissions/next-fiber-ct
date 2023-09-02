@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
-import NavBar from '@/components/navigation/Navbar.jsx';
+import NavBar from '@/components/navigation/NavBar.jsx';
 
 const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
