@@ -1,11 +1,12 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { Suspense, useRef } from 'react'
-import NavBar from '@/components/navigation/NavBar.jsx';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Stars } from '@react-three/drei';
-
+import { Suspense, useEffect, useRef } from 'react'
+import NavBar from '@/components/navigation/NavBar.jsx'
+import { Canvas, useFrame } from '@react-three/fiber'
+import Image from 'next/image'
+import { gsap } from 'gsap'
+import { useThree } from '@react-three/fiber'
 const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
 const Gallery = dynamic(() => import('@/components/canvas/Creative').then((mod) => mod.Gallery), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
@@ -24,15 +25,60 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
   ),
 })
 const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
-const RotatingStars = () => {
-  const ref = useRef();
 
-  useFrame(({ clock }) => {
-    ref.current.rotation.x += 0.001;
-    ref.current.rotation.y += 0.001;
+const CameraMove = () => {
+  const { camera } = useThree();
+  const angle = useRef(0); // Use useRef to persist angle between renders
+  angle.radius = 10; // Define a radius for the circular path
+
+  useFrame(() => {
+    angle.current += 0.01; // Increment the angle
+    angle.radius += 0.1;// Define a radius for the circular path
+
+    // Update x and z positions based on angle and radius
+    camera.position.x = Math.cos(angle.current) * angle.radius;
+    camera.position.z = Math.sin(angle.current) * angle.radius;
+    camera.position.y += 0.05;
+
+    camera.lookAt(0, 0, 0);
   });
 
-  return <Stars ref={ref} />;
+  return null;
+};
+
+
+const CameraAnimation = () => {
+  const { camera } = useThree();
+
+  useEffect(() => {
+    // Define the points for the curve
+    const points = [
+      { x: 0, y: 0, z: 0 },
+      { x: 2, y: 30, z: 50 },
+      { x: 5, y: 40, z: -10 },
+      { x: 20, y: 50, z: -45 },
+    ];
+
+    // Create an interpolator function
+    const interpolator = gsap.utils.interpolate(points[0], points[points.length - 1]);
+
+    // Use GSAP to animate the camera
+    gsap.to(camera.position, {
+      duration: 60,
+      ease: 'power1.inOut',
+      progress: progress => {
+        const point = interpolator(progress);
+        camera.position.set(point.x, point.y, point.z);
+      },
+      onUpdate: () => camera.updateProjectionMatrix(),
+    });
+  }, [camera]);
+
+  useFrame(() => {
+    camera.lookAt(0, 0, 0);
+  });
+
+  return null;
 };
 
 export default function Page() {
@@ -40,49 +86,29 @@ export default function Page() {
     <>
       <NavBar />
       <Canvas style={{ position: 'fixed', top: 0, left: 0, zIndex: -1 }}>
-        <RotatingStars />
+        <Gallery scale={2} target={[40, 0, 20]} position={[-40, -1.6, 40]} rotation={[0.0, -0.3, 0]} />
+        <CameraMove />
+        <Common color={'white'} />
       </Canvas>
       <div className="scrollcontent" style={{ position: 'relative', zIndex: 1 }}>
         <div className='mx-auto flex w-full flex-col flex-wrap items-center md:flex-row  lg:w-4/5'>
           {/* jumbo */}
           <div className='flex w-full flex-col items-start justify-center p-12 text-center md:w-2/5 md:text-left'>
             <p className='w-full uppercase'>3D Web, XR, VR, AR, DeSo, Blockchain.</p>
-            <h1 className='my-4 text-5xl font-bold leading-tight'>Creative Transmissions</h1>
-            <p className='mb-8 text-2xl leading-normal'>Full Stack Web Development</p>
+            <Image
+              src="/img/logo.jpg"
+              alt="Creative Transmissions Logo"
+              width={200}
+              height={200}
+            />
           </div>
-
-          <div className='w-full text-center md:w-3/5'>
-            <View className='flex h-96 w-full flex-col items-center justify-center'>
-              <Suspense fallback={null}>
-                <Logo route='/blob' scale={0.6} position={[0, 0, 0]} />
-                <Common />
-              </Suspense>
-            </View>
-          </div>
+          <p className='mb-8 text-2xl leading-normal'>Full Stack Web Development</p>
         </div>
 
-        <div className='mx-auto flex w-full flex-col flex-wrap items-center p-12 md:flex-row  lg:w-4/5'>
-          {/* first row */}
-          <div className='relative my-12 h-96 w-full py-6 md:mb-40'>
-            <View orbit className='relative h-full sm:w-full'>
-              <Suspense fallback={null}>
-                <Gallery scale={2} target={[40, 0, 20]} position={[-40, -1.6, 0]} rotation={[0.0, -0.3, 0]} />
-                <Common color={'white'} />
-              </Suspense>
-            </View>
-          </div>
-          {/* second row */}
+        <div className='w-full text-center md:w-3/5'>
 
-          <div className='w-full p-6 sm:w-1/2'>
-            <h2 className='mb-3 text-3xl font-bold leading-none text-gray-800'>Dom and 3D are synchronized</h2>
-            <p className='mb-8 text-gray-600'>
-              3D Divs are renderer through the View component. It uses gl.scissor to cut the viewport into segments. You
-              tie a view to a tracking div which then controls the position and bounds of the viewport. This allows you to
-              have multiple views with a single, performant canvas. These views will follow their tracking elements,
-              scroll along, resize, etc.
-            </p>
-          </div>
         </div>
+
       </div>
       <style jsx global>{`
         body {
