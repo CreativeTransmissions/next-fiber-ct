@@ -1,6 +1,7 @@
 const pageData = {
-    'title': 'Developing the Future of Web Experiences',
-    'tagline': 'Crafting the Web\'s Future: From Time-Tested Methods to Blockchain and 3D.',
+    'title': 'Software Development',
+    'tagline': 'Crafting the Future of the Web From Time-Tested Methods to Blockchain and 3D.',
+    'tagline2': ''
 };
 
 export default pageData;

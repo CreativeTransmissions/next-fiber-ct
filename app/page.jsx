@@ -86,28 +86,26 @@ export default function Page() {
   return (
     <>
       <NavBar />
-      <Canvas style={{ position: 'fixed', top: 0, left: 0, zIndex: -1 }}>
-        <Gallery scale={2} target={[40, 0, 20]} position={[-40, -1.6, 40]} rotation={[0.0, -0.3, 0]} />
-        <CameraMove />
-        <Common color={'white'} />
-      </Canvas>
       <div className="scrollcontent" style={{ position: 'relative', zIndex: 1 }}>
-        <div className='mx-auto flex w-full flex-col flex-wrap items-center md:flex-row  lg:w-4/5'>
-          {/* jumbo */}
-          <div className='flex w-full flex-col items-start justify-center p-12 text-center md:w-2/5 md:text-left'>
-            <p className='w-full uppercase'>{pageData.title}</p>
-            <Image
+        <div className='mx-auto flex w-full flex-wrap items-center md:flex-row lg:w-4/5'>
+          <div className='flex w-full flex-col items-start justify-center text-center md:w-2/5 md:text-left'>
+            <Image className='p-0 mt-6'
               src="/img/logo.jpg"
               alt="Creative Transmissions Logo"
-              width={200}
-              height={200}
+              width={250}
+              height={250}
             />
+            <p className='mb-8 text-2xl leading-normal pl-2'>{pageData.title}</p>
           </div>
-          <p className='mb-8 text-2xl leading-normal'>{pageData.tagline}</p>
+          <div className='flex w-full flex-col items-start justify-center text-center md:w-3/5 md:text-left'>
+
+            <p className='mb-8 pl-2'>{pageData.tagline}</p>
+            <p className='mb-8 pl-2'>{pageData.tagline2}</p>
+          </div>
         </div>
 
-        <div className='w-full text-center md:w-3/5'>
 
+        <div className='w-full text-center md:w-3/5'>
         </div>
 
       </div>
