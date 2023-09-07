@@ -14,3 +14,27 @@ export function Gallery(props) {
 
     return <primitive object={scene} {...props} />
 }
+
+export function Computer(props) {
+    const { scene } = useGLTF('/computer.glb')
+
+    ///useFrame((state, delta) => (scene.rotation.y += delta / 10))
+
+    return <primitive object={scene} position={[0, 0, 0.25]} rotation={[0, Math.PI, 0]} {...props} />
+}
+
+export function Headset(props) {
+    const { scene } = useGLTF('/gallery.glb')
+
+    ///useFrame((state, delta) => (scene.rotation.y += delta / 10))
+
+    return <primitive object={scene} {...props} />
+}
+
+export function Phone(props) {
+    const { scene } = useGLTF('/gallery.glb')
+
+    ///useFrame((state, delta) => (scene.rotation.y += delta / 10))
+
+    return <primitive object={scene} {...props} />
+}
