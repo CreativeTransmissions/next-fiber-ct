@@ -7,6 +7,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import Image from 'next/image'
 import { gsap } from 'gsap'
 import { useThree } from '@react-three/fiber'
+import pageData from './homePageData.js'
 const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
 const Gallery = dynamic(() => import('@/components/canvas/Creative').then((mod) => mod.Gallery), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
@@ -65,7 +66,7 @@ const CameraAnimation = () => {
     // Use GSAP to animate the camera
     gsap.to(camera.position, {
       duration: 60,
-      ease: 'power1.inOut',
+      ease: 'sine.out',
       progress: progress => {
         const point = interpolator(progress);
         camera.position.set(point.x, point.y, point.z);
@@ -94,7 +95,7 @@ export default function Page() {
         <div className='mx-auto flex w-full flex-col flex-wrap items-center md:flex-row  lg:w-4/5'>
           {/* jumbo */}
           <div className='flex w-full flex-col items-start justify-center p-12 text-center md:w-2/5 md:text-left'>
-            <p className='w-full uppercase'>3D Web, XR, VR, AR, DeSo, Blockchain.</p>
+            <p className='w-full uppercase'>{pageData.title}</p>
             <Image
               src="/img/logo.jpg"
               alt="Creative Transmissions Logo"
@@ -102,7 +103,7 @@ export default function Page() {
               height={200}
             />
           </div>
-          <p className='mb-8 text-2xl leading-normal'>Full Stack Web Development</p>
+          <p className='mb-8 text-2xl leading-normal'>{pageData.tagline}</p>
         </div>
 
         <div className='w-full text-center md:w-3/5'>
