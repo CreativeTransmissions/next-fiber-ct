@@ -93,7 +93,7 @@ export default function Page() {
         </div>
 
 
-        <div className='w-full text-center md:w-3/5'>
+        <div className='w-full text-left md:w-3/5'>
         </div>
 
       </div >

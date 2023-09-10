@@ -28,7 +28,7 @@ export function Computer(props) {
     };
 
     useEffect(() => {
-        if (!isTouchDevice()) {
+        if (!isMobileTouchDevice()) {
             window.addEventListener('mousemove', handleMouseMove);
             return () => {
                 window.removeEventListener('mousemove', handleMouseMove);
@@ -37,8 +37,8 @@ export function Computer(props) {
     }, []);
 
     useFrame(() => {
-        if (isTouchDevice()) {
-            scene.rotation.y += 0.005;
+        if (isMobileTouchDevice()) {
+            scene.rotation.y += 0.01;
         } else {
             scene.rotation.y = rotationY;
         }
@@ -47,9 +47,12 @@ export function Computer(props) {
     return <primitive object={scene} position={[0, 0, 0.5]} rotation={[0, rotationY, 0]} {...props} />;
 }
 
-function isTouchDevice() {
-    return false;
+const isMobileTouchDevice = () => {
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints;
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    return isTouch && isMobile;
 }
+
 
 
 export function Headset(props) {
