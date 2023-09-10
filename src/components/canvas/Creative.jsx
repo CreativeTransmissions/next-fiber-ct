@@ -1,9 +1,9 @@
 'use client'
 
 import { useGLTF } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'
+import { useThree, useFrame } from '@react-three/fiber';
 import * as THREE from 'three'
-import { useMemo, useRef, useState } from 'react'
+import { useMemo, useRef, useState, useEffect } from 'react'
 import { Line, useCursor, MeshDistortMaterial } from '@react-three/drei'
 import { useRouter } from 'next/navigation'
 
@@ -16,12 +16,41 @@ export function Gallery(props) {
 }
 
 export function Computer(props) {
-    const { scene } = useGLTF('/computer.glb')
+    const { scene } = useGLTF('/computer.glb');
+    const [rotationY, setRotationY] = useState(Math.PI);
 
-    useFrame((state, delta) => (scene.rotation.y += delta))
+    const handleMouseMove = (event) => {
+        const mouseX = event.clientX;
+        const windowWidth = window.innerWidth;
+        const normalizedMouseX = (mouseX / windowWidth) * 2 - 1;
+        const desiredRotation = normalizedMouseX * (Math.PI * 2);
+        setRotationY(desiredRotation);
+    };
 
-    return <primitive object={scene} position={[0, 0, 0.5]} rotation={[0, Math.PI, 0]} {...props} />
+    useEffect(() => {
+        if (!isTouchDevice()) {
+            window.addEventListener('mousemove', handleMouseMove);
+            return () => {
+                window.removeEventListener('mousemove', handleMouseMove);
+            };
+        }
+    }, []);
+
+    useFrame(() => {
+        if (isTouchDevice()) {
+            scene.rotation.y += 0.005;
+        } else {
+            scene.rotation.y = rotationY;
+        }
+    });
+
+    return <primitive object={scene} position={[0, 0, 0.5]} rotation={[0, rotationY, 0]} {...props} />;
 }
+
+function isTouchDevice() {
+    return false;
+}
+
 
 export function Headset(props) {
     const { scene } = useGLTF('/oculus_quest_2.glb')

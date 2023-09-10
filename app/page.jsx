@@ -75,8 +75,8 @@ export default function Page() {
       <NavBar />
       <div className="scrollcontent" style={{ position: 'relative', zIndex: 1 }}>
         <div className='mx-auto flex w-full flex-wrap items-center md:flex-row lg:w-4/5'>
-          <div className='flex w-full flex-col items-start justify-center text-center md:w-2/5 md:text-left'>
-            <Image className='p-0 mt-6'
+          <div className='flex w-full flex-col items-center justify-center text-center md:w-2/5 md:text-left md:items-start'>
+            <Image className='p-0 mt-6 mx-auto md:mx-0'
               src="/img/logo.jpg"
               alt="Creative Transmissions Logo"
               width={250}
@@ -84,9 +84,9 @@ export default function Page() {
             />
             <p className='mb-8 text-2xl leading-normal pl-2'>{pageData.title}</p>
           </div>
-          <div className='flex w-full flex-col items-start justify-center text-center md:w-3/5 md:text-left pt 1rem'>
-            <Canvas style={{ height: '280px', border: '2px solid #000', width: '90%' }}>
-              <Mobile />
+          <div className='flex w-full flex-col items-center justify-center text-center md:w-3/5 md:text-left pt-4'>
+            <Canvas style={{ height: '280px', border: '2px solid #000', width: '100%' }}>
+              <Computer />
               <Common color={'#AAF'} />
             </Canvas>
           </div>
