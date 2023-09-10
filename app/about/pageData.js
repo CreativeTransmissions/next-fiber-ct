@@ -1,3 +1,4 @@
+/*
 const aboutData = {
     "intro": "I'm Andrew, the technical architect behind Creative Transmissions, dedicated to integrating the latest technologies into your web projects. With over 19 years in the tech sector, my expertise has evolved from IT to WordPress and PHP development, and now to groundbreaking work in advanced web development.",
     "intro2": "I specialize in integrating the latest tech into your projects, including WebXR, Geographical Systems, Social Graphs, Blockchain and Big Data. I thrive on innovation and am passionate about leveraging new tools and techniques to create faster and more efficient development processes. I'm highly focused, an excellent problem solver, and resilient in the face of challenges. My mission is to ensure that your web projects are not just current but future proof.",
@@ -8,5 +9,15 @@ const aboutData = {
     "expertise": "Beyond web development, I've collaborated with Connexio, gaining deep insights into social graphs and analytics. This experience has endowed me with a unique perspective on how data can be leveraged to create more engaging and personalised user experiences.",
     "collaborate": "We're at an exciting crossroads where traditional web development is converging with awe-inspiring advancements in 3D and VR technologies. If you're looking to push the boundaries in 3D WebXR, APIs, or JavaScript frameworks like Three.js, let's connect and build something extraordinary together."
 };
-
+*/
+const aboutData = {
+    "intro": "",
+    "intro2": "",
+    "specialising": "",
+    "journey": "",
+    "mastering": "",
+    "initiative": "",
+    "expertise": "",
+    "collaborate": ""
+};
 export default aboutData;

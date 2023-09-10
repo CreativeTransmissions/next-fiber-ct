@@ -43,7 +43,7 @@ const AboutPage = () => {
                 <p>{aboutData.expertise}</p>
             </section>
             <section>
-                <h2>Let's Collaborate</h2>
+                <h2>Lets Collaborate</h2>
                 {/* eslint-disable-next-line react/no-unescaped-entities */}
                 <p>{aboutData.collaborate}</p>
             </section>
