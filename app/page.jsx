@@ -11,7 +11,7 @@ import pageData from './homePageData.js'
 const Computer = dynamic(() => import('@/components/canvas/Creative').then((mod) => mod.Computer), { ssr: false })
 const Headset = dynamic(() => import('@/components/canvas/Creative').then((mod) => mod.Headset), { ssr: false })
 const Mobile = dynamic(() => import('@/components/canvas/Creative').then((mod) => mod.Mobile), { ssr: false })
-
+const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), { ssr: false })
 const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
 
 const CameraMove = () => {
@@ -85,10 +85,10 @@ export default function Page() {
             <p className='mb-8 text-2xl leading-normal pl-2'>{pageData.title}</p>
           </div>
           <div className='flex w-full flex-col items-center justify-center text-center md:w-3/5 md:text-left pt-4'>
-            <Canvas style={{ height: '280px', border: '2px solid #000', width: '100%' }}>
+            <View style={{ height: '280px', border: '2px solid #000', width: '100%' }}>
               <Computer />
               <Common color={'#AAF'} />
-            </Canvas>
+            </View>
           </div>
         </div>
 
