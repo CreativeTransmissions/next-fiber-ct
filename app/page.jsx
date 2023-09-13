@@ -9,6 +9,7 @@ import { useThree } from '@react-three/fiber'
 import pageData from './homePageData.js'
 import LogoWithCaption from '@/components/home/Logo.jsx'
 import DevicesCanvas from '@/components/home/DevicesCanvas.jsx'
+import SkillSphere from '@/components/home/SkillSphere.jsx'
 
 const CameraMove = () => {
   const { camera } = useThree();
@@ -69,14 +70,10 @@ export default function Page() {
   return (
     <>
       <NavBar />
+      <SkillSphere style={{ position: 'fixed', top: 0, left: 0, zIndex: -1 }} />
       <div className="scrollcontent" style={{ position: 'relative', zIndex: 1 }}>
-        <div className='mx-auto flex w-full flex-wrap items-center md:flex-row lg:w-4/5'>
+        <div className='mx-auto flex w-full flex-wrap items-center md:flex-row lg:w-4/5 pt-24'>
           <LogoWithCaption pageData={pageData} />
-          <DevicesCanvas />
-        </div>
-
-
-        <div className='w-full text-left md:w-3/5'>
         </div>
 
       </div >

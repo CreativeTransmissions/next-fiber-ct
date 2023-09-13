@@ -53,3 +53,9 @@ nav a {
   font-weight: 400;
   margin-bottom: 1rem;
 }
+
+.subheader {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}

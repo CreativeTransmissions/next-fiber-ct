@@ -12,6 +12,7 @@ const AboutPage = () => {
                     </p>
                     {/* eslint-disable-next-line react/no-unescaped-entities */}
                     <p>{aboutData.intro2}</p>
+                    <p>{aboutData.intro3}</p>
                 </div>
                 <div className='sm:w-full md:w-2/5 pl-0 md:pl-4'>
                     <img className='md:pl-8' src='/img/avatar.jpg' alt='Andrew Van Duivenbode - Full Stack Developer' />

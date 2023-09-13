@@ -5,10 +5,10 @@ export const LogoWithCaption = (props) => {
     const { pageData } = props;
 
     return (
-        <div className='flex w-full flex-col items-center justify-center text-center md:w-2/5 md:text-left md:items-start'>
+        <div className='flex w-full flex-col items-center justify-center text-center'>
             <Image
                 className='p-0 mt-6 mx-auto md:mx-0'
-                src="/img/logo.jpg"
+                src="/img/logo.png"
                 alt="Creative Transmissions Logo"
                 width={250}
                 height={250}
