@@ -6,9 +6,10 @@
   ],
   "rules": {
     "import/prefer-default-export": "off",
-    "no-console": "warn",
-    "no-var": "error",
+    "no-console": "off",
+    "no-var": "off",
     "no-html-link-for-pages": "off",
-    "react/no-unescaped-entities": "off"
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off"
   }
 }

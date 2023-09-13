@@ -23,7 +23,7 @@ function Word({ children, ...props }) {
         // Animate font color
         ref.current.material.color.lerp(color.set(hovered ? '#fa2720' : 'white'), 0.1)
     })
-    return <Text ref={ref} onPointerOver={over} onPointerOut={out} onClick={() => console.log('clicked')} {...props} {...fontProps} children={children} />
+    return <Text ref={ref} onPointerOver={over} onPointerOut={out} {...props} {...fontProps} children={children} />
 }
 
 const wordSequence = (index) => {

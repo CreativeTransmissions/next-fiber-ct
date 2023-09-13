@@ -8,8 +8,7 @@ const AboutPage = () => {
             <section className='flex flex-col sm:flex-row'>
                 <div className='w-full md:w-3/5'>
                     {/* eslint-disable-next-line react/no-unescaped-entities */}
-                    <p>{aboutData.intro}
-                    </p>
+                    <p>I&#32;m Andrew, the technical architect behind Creative Transmissions, dedicated to integrating the latest technologies into your web projects. With over 19 years in the tech sector, my expertise has evolved from IT to WordPress and PHP development, and now to groundbreaking work in advanced web development.</p>
                     {/* eslint-disable-next-line react/no-unescaped-entities */}
                     <p>{aboutData.intro2}</p>
                     <p>{aboutData.intro3}</p>
