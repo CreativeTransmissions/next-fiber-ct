@@ -23,7 +23,7 @@ function Word({ children, ...props }) {
         // Animate font color
         ref.current.material.color.lerp(color.set(hovered ? '#fa2720' : 'white'), 0.1)
     })
-    return <Text ref={ref} onPointerOver={over} onPointerOut={out} {...props} {...fontProps} children={children} />
+    return <Text ref={ref} onPointerOver={over} onPointerOut={out} {...props} {...fontProps}>{children}</Text>
 }
 
 const wordSequence = (index) => {
@@ -47,7 +47,7 @@ function Cloud({ count = 4, radius = 10 }) {
         }
         return temp
     }, [count, radius])
-    return words.map(([pos, word], index) => <Word key={index} position={pos} children={word} />)
+    return words.map(([pos, word], index) => <Word key={index} position={pos}>{word}</Word>)
 }
 
 export const SkillSphere = (props) => {
