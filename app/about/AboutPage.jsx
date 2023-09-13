@@ -4,7 +4,7 @@ import aboutData from './pageData.js'; // Adjust the import path to where your d
 const AboutPage = () => {
     return (
         <div className='about text-left'>
-            <h1>Welcome!</h1>
+            <h1>Welcome</h1>
             <section className='flex flex-col sm:flex-row'>
                 <div className='w-full md:w-3/5'>
                     {/* eslint-disable-next-line react/no-unescaped-entities */}
@@ -39,11 +39,10 @@ const AboutPage = () => {
                 </p>
             </section>
             <section>
-                <section>
-                    <h2>Lets Collaborate</h2>
-                    {/* eslint-disable-next-line react/no-unescaped-entities */}
-                    <p>The world is now at an exciting crossroads where traditional web development is converging with awe-inspiring advancements in 3D and VR technologies. If you&apos;re looking to push the boundaries in 3D WebXR, APIs, or JavaScript frameworks like Three.js. Let&apos;s connect and build something extraordinary together.</p>
-                </section>
+                <h2>Lets Collaborate</h2>
+                {/* eslint-disable-next-line react/no-unescaped-entities */}
+                <p>The world is now at an exciting crossroads where traditional web development is converging with awe-inspiring advancements in 3D and VR technologies. If you&apos;re looking to push the boundaries in 3D WebXR, APIs, or JavaScript frameworks like Three.js. Let&apos;s connect and build something extraordinary together.</p>
+            </section>
         </div >
     );
 };

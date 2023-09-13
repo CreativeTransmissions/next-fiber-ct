@@ -28,8 +28,8 @@ export default function Page() {
             <div className='mx-auto flex w-full flex-col flex-wrap items-center md:flex-row  lg:w-4/5'>
                 {/* jumbo */}
                 <div className='flex w-full flex-col items-start justify-center p-12 text-center'>
-                    <h1 className='my-4 text-5xl font-bold leading-tight'>Contact</h1>
-                    <p className='mb-8 text-2xl leading-normal'><a href="https://www.linkedin.com/in/avduivenbode/">https://www.linkedin.com/in/avduivenbode/</a></p>
+                    <h1 className='my-4 text-5xl leading-tight'>Contact</h1>
+                    <p className='mb-8 text-2xl leading-normal text-center pt-12'><a href="https://www.linkedin.com/in/avduivenbode">https://www.linkedin.com/in/avduivenbode</a></p>
                 </div>
             </div>
         </>
