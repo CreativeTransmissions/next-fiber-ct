@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
 import NavBar from '@/components/navigation/NavBar.jsx';
 import LinkedIn from '@/components/contact/LinkedIn.jsx';
+import GitHubButton from 'react-github-btn';
 
 const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
@@ -31,7 +32,9 @@ export default function Page() {
                 <div className='flex w-full h-full items-center justify-center p-12 text-center'>
                     <LinkedIn />
                 </div>
-
+                <div className='flex w-full h-full items-center justify-center p-12 text-center'>
+                    <GitHubButton href="https://github.com/CreativeTransmissions" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" data-show-count="true" aria-label="Follow @YourGitHubUsername on GitHub">Follow @CreativeTransmissions</GitHubButton>
+                </div>
             </div>
         </>
     )

@@ -18,16 +18,16 @@ export const LinkedIn = () => {
     return (
         <div>
             <div
-                class="badge-base LI-profile-badge"
+                className="badge-base LI-profile-badge"
                 data-locale="en_US"
-                data-size="medium"
+                data-size="large"
                 data-theme="light"
                 data-type="VERTICAL"
                 data-vanity="avduivenbode"
                 data-version="v1"
             >
                 <a
-                    class="badge-base__link LI-simple-link"
+                    className="badge-base__link LI-simple-link"
                     href="https://www.linkedin.com/in/avduivenbode"
                 />
             </div>
