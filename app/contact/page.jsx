@@ -32,7 +32,7 @@ export default function Page() {
                 <div className='flex w-full h-full items-center justify-center p-12 text-center'>
                     <LinkedIn />
                 </div>
-                <div className='flex w-full h-full items-center justify-center p-12 text-center'>
+                <div className='flex w-full h-full items-center justify-center text-center'>
                     <GitHubButton href="https://github.com/CreativeTransmissions" data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" data-show-count="true" aria-label="Follow @YourGitHubUsername on GitHub">Follow @CreativeTransmissions</GitHubButton>
                 </div>
             </div>
