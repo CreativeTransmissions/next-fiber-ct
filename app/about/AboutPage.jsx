@@ -4,7 +4,7 @@ import aboutData from './pageData.js'; // Adjust the import path to where your d
 const AboutPage = () => {
     return (
         <div className='about text-left'>
-            <h1>Welcome</h1>
+            <h1 className="text-4xl mb-12">Welcome</h1>
             <section className='flex flex-col sm:flex-row'>
                 <div className='w-full md:w-3/5'>
                     {/* eslint-disable-next-line react/no-unescaped-entities */}
