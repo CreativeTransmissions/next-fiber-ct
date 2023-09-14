@@ -77,11 +77,7 @@ export default function Page() {
         </div>
 
       </div >
-      <style jsx global>{`
-        body {
-          overflow: hidden;
-        }
-      `}</style>
+
     </>
   )
 }
