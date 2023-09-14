@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-export default function linkedin() {
+export const LinkedIn = () => {
     useEffect(() => {
         const script = document.createElement('script');
 
@@ -34,3 +34,5 @@ export default function linkedin() {
         </div>
     );
 }
+
+export default LinkedIn;
