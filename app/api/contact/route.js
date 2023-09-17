@@ -33,7 +33,8 @@ export async function POST(req) {
         return NextResponse.json({
             success: false,
             'message': 'ERROR',
-            content: content
+            content: content,
+            error: error.response.errors
         })
     }
 

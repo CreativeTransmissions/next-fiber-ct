@@ -21,8 +21,9 @@ const ContactForm = () => {
             });
 
             if (response.ok) {
-                console.log('Email sent successfully');
                 setIsSubmitted(true);
+                console.error(response);
+
             } else {
                 console.error('Error sending email');
                 console.error(response);
