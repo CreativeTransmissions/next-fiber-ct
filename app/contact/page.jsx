@@ -8,8 +8,6 @@ import GitHubButton from 'react-github-btn';
 import ContactForm from '@/components/contact/ContactForm';
 import Head from 'next/head'
 
-const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
-
 export default function Page() {
     return (
         <><Head>

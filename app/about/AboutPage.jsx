@@ -4,7 +4,7 @@ import aboutData from './pageData.js'; // Adjust the import path to where your d
 const AboutPage = () => {
     return (
         <div class="mx-auto max-w-2xl flex flex-col flex-wrap items-center md:flex-row lg:md-48 lg:md-48 p12 p-8 sm:p-0">
-            <h1 className="text-4xl mb-12">Welcome</h1>
+            <h1 className="text-4xl mb-12 text-left">Welcome</h1>
             <section className='flex flex-col sm:flex-row'>
                 <div className='w-full md:w-3/5'>
                     {/* eslint-disable-next-line react/no-unescaped-entities */}
@@ -13,7 +13,7 @@ const AboutPage = () => {
                     <p>I specialize in integrating the latest tech into your web projects, including WebXR, Geographical Systems, Social Graphs, Blockchain and Big Data.</p>
                     <p>I thrive on innovation and am passionate about leveraging new tools and techniques to create faster and more efficient development processes. I&apos;m highly focused, an excellent problem solver, and resilient in the face of challenges. My mission is to ensure that your web projects are not just current but future proof.</p>
                 </div>
-                <div className='sm:w-full md:w-2/5 pl-0 md:pl-4'>
+                <div className='sm:w-full md:w-2/5 pl-0 md:pl-4 pb-12'>
                     <img className='md:pl-8' src='/img/avatar.jpg' alt='Andrew Van Duivenbode - Full Stack Developer' />
                 </div>
             </section >
