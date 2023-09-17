@@ -22,11 +22,9 @@ const ContactForm = () => {
 
             if (response.ok) {
                 setIsSubmitted(true);
-                console.error(response);
 
             } else {
                 console.error('Error sending email');
-                console.error(response);
             }
         } catch (error) {
             console.error('There was an error sending the email', error);
