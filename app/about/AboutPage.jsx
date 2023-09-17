@@ -3,7 +3,7 @@ import aboutData from './pageData.js'; // Adjust the import path to where your d
 
 const AboutPage = () => {
     return (
-        <div className='about text-left'>
+        <div class="mx-auto max-w-2xl flex flex-col flex-wrap items-center md:flex-row lg:md-48 lg:md-48 p12 p-8 sm:p-0">
             <h1 className="text-4xl mb-12">Welcome</h1>
             <section className='flex flex-col sm:flex-row'>
                 <div className='w-full md:w-3/5'>
@@ -20,7 +20,9 @@ const AboutPage = () => {
             <section>
                 <h2>A Journey Through Web Innovation</h2>
                 {/* eslint-disable-next-line react/no-unescaped-entities */}
-                <p>My career has been a fascinating exploration of web technologies. I founded Creative Transmissions in 2010. Initially I created PHP websites usinge MVC frameworks, before specializing in JavaScript Google Maps applications. Following demand I created the TransitQuote brand - a range of WordPress plugins that leverage GMaps for dynamic pricing in the courier and transport sectors. The venture honed my technical and leadership skills, as I managed remote teams and implemented agile methodologies.</p>
+                <p>My career has been a fascinating exploration of web technologies. I founded Creative Transmissions in 2010. Initially I created PHP websites usinge MVC frameworks, before specializing in JavaScript Google Maps applications.</p>
+                <p>Following demand I created the TransitQuote brand - a range of WordPress plugins that leverage Google Maps for dynamic pricing in the courier and transport sectors.</p>
+                <p>The venture honed my technical and leadership skills, as I managed remote teams and implemented agile methodologies.</p>
             </section>
             <section>
                 <h2>Expertise in Data and Analytics</h2>

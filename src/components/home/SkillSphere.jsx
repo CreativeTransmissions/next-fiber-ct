@@ -27,7 +27,7 @@ function Word({ children, ...props }) {
 }
 
 const wordSequence = (index) => {
-    let words = ['HTMl 5', 'CSS', 'JavaScript', 'Databases', 'MySQL', 'SQL Server', 'Vue', 'Svelte', 'Procedures', 'Optimization', 'AWS', 'RDS', 'DynamoDB', 'MariaDB', 'Docker', 'Web 3', 'DeSo', 'Git', 'GitHub', 'Agile', 'Remote', 'PHP', 'Laravel', 'PHPUnit', 'Clean Code', 'jQuery', 'WordPress', 'WebXR', 'ThreeJS', 'BlockChain', 'APIs', 'SDKs']
+    let words = ['HTMl 5', 'CSS', 'JavaScript', 'Databases', 'MySQL', 'SQL Server', 'Vue', 'Svelte', 'Procedures', 'Optimization', 'AWS', 'RDS', 'DynamoDB', 'MariaDB', 'Docker', 'Web 3', 'DeSo', 'Git', 'GitHub', 'Agile', 'Remote', 'PHP', 'Laravel', 'PHPUnit', 'Clean Code', 'jQuery', 'WordPress', 'WebXR', 'ThreeJS', 'BlockChain', 'APIs', 'SDKs', 'Web3']
     return words[index % words.length]
 }
 function Cloud({ count = 4, radius = 10 }) {

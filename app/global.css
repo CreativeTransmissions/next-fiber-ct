@@ -42,16 +42,21 @@ h1 {
   margin-bottom: 1rem;
 }
 
-.about h2 {
+h2,
+section h2 {
   font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  margin-top: 1em;
 }
 
-.about p {
-  font-size: 1.2rem;
+p,
+section p {
+  font-size: 1.1rem;
   font-weight: 400;
   margin-bottom: 1rem;
+  line-height: 2rem;
+  text-align: left;
 }
 
 .subheader {
