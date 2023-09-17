@@ -1,31 +1,37 @@
 import React from 'react';
-
-async function handleSubmit(event) {
-    event.preventDefault();
-    console.log('handleSubmit');
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-
-    try {
-        const response = await fetch('/api/contact', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
-
-        if (response.ok) {
-            console.log('Email sent successfully');
-        } else {
-            console.error('Error sending email');
-        }
-    } catch (error) {
-        console.error('There was an error sending the email', error);
-    }
-}
+import { useState } from 'react';
 
 const ContactForm = () => {
+
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const data = Object.fromEntries(formData);
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                console.log('Email sent successfully');
+                setIsSubmitted(true);
+            } else {
+                console.error('Error sending email');
+                console.error(response);
+            }
+        } catch (error) {
+            console.error('There was an error sending the email', error);
+        }
+    }
+
     return (
         <>
             <div className="container mx-auto px-4 py-12">
@@ -60,7 +66,11 @@ const ContactForm = () => {
                     </div>
                     {/* Send Button */}
                     <div className="text-center mt-8">
-                        <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Send</button>
+                        {isSubmitted ? (
+                            <p>Thank you for getting in touch! I will email my response as soon as possible.</p>
+                        ) : (
+                            <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">Send</button>
+                        )}
                     </div>
                 </form>
             </div>
