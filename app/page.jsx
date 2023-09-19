@@ -70,7 +70,7 @@ export default function Page() {
   return (
     <>
       <NavBar />
-      <SkillSphere style={{ position: 'fixed', top: 0, left: 0, zIndex: -1 }} />
+      <SkillSphere style={{ position: 'absolute', top: 0, left: 0, zIndex: -1 }} />
       <div className="scrollcontent" style={{ position: 'relative', zIndex: 1 }}>
         <div className='mx-auto flex w-full flex-wrap items-center md:flex-row lg:w-4/5 pt-24'>
           <LogoWithCaption pageData={pageData} />

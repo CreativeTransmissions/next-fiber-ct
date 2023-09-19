@@ -3,7 +3,7 @@ import aboutData from './pageData.js'; // Adjust the import path to where your d
 
 const AboutPage = () => {
     return (
-        <div class="mx-auto max-w-2xl flex flex-col flex-wrap items-center md:flex-row lg:md-48 lg:md-48 p12 p-8 sm:p-0">
+        <div class="mx-auto max-w-2xl flex flex-col flex-wrap items-center md:flex-row lg:md-48 lg:md-48 sm:p-0">
             <h1 className="text-4xl mb-12 text-left">Welcome</h1>
             <section className='flex flex-col sm:flex-row'>
                 <div className='w-full md:w-3/5'>
