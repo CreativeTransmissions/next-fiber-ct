@@ -1,7 +1,6 @@
 'use client'
 
 import { Suspense, useEffect, useRef } from 'react'
-import NavBar from '@/components/navigation/NavBar.jsx'
 import { Canvas, useFrame } from '@react-three/fiber'
 import Image from 'next/image'
 import { gsap } from 'gsap'
@@ -69,8 +68,6 @@ const CameraAnimation = () => {
 export default function Page() {
   return (
     <>
-      <NavBar />
-      <SkillSphere style={{ position: 'absolute', top: 0, left: 0, zIndex: -1 }} />
       <div className="scrollcontent" style={{ position: 'relative', zIndex: 1 }}>
         <div className='mx-auto flex w-full flex-wrap items-center md:flex-row lg:w-4/5 pt-24'>
           <LogoWithCaption pageData={pageData} />

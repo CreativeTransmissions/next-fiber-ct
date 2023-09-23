@@ -1,4 +1,6 @@
 import { Layout } from '@/components/dom/Layout'
+import NavBar from '@/components/navigation/NavBar.jsx';
+
 import '@/global.css'
 import '@/globals.css'
 
@@ -18,7 +20,7 @@ export default function RootLayout({ children }) {
       <head />
       <body>
         {/* To avoid FOUT with styled-components wrap Layout with StyledComponentsRegistry https://beta.nextjs.org/docs/styling/css-in-js#styled-components */}
-        <Layout>{children}</Layout>
+        <Layout><NavBar />{children}</Layout>
       </body>
     </html>
   )
