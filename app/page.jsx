@@ -67,8 +67,8 @@ const CameraAnimation = () => {
 
 export default function Page() {
   return (
-    <>
-      <div className="scrollcontent" style={{ position: 'relative', zIndex: 1 }}>
+    <><SkillSphere />
+      <div className="scrollcontent" style={{ position: 'relative', zIndex: 10 }}>
         <div className='mx-auto flex w-full flex-wrap items-center md:flex-row lg:w-4/5 pt-24'>
           <LogoWithCaption pageData={pageData} />
         </div>
