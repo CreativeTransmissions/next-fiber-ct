@@ -53,7 +53,9 @@ function Cloud({ count = 4, radius = 10 }) {
 export const SkillSphere = (props) => {
 
     return (
-        <View style={{ height: '100%', width: '100%', position: 'fixed' }}>
+        <View style={{
+            height: '100%', width: '100%', position: 'absolute', top: 0, zIndex: '- 1'
+        }}>
             <fog attach="fog" args={['#202025', 0, 80]} />
             <Cloud count={12} radius={40} />
             <OrbitControls autoRotate={true} enableZoom={false} />
