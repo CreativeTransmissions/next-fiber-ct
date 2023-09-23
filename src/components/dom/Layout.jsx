@@ -20,12 +20,11 @@ const Layout = ({ children }) => {
       {children}
       <Scene
         style={{
-          position: 'fixed',
+          position: 'absolute',
           top: 0,
           left: 0,
           width: '100vw',
-          height: '100vh',
-          pointerEvents: 'none',
+          height: '100vh'
         }}
         eventSource={ref}
         eventPrefix='client'

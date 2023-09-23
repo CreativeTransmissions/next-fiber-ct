@@ -65,3 +65,7 @@ section p {
   font-weight: 600;
   margin-bottom: 1rem;
 }
+
+body div:first-child {
+  touch-action: auto !important;
+}
