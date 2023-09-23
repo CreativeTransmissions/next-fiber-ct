@@ -22,7 +22,6 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 8rem;
   height: 3rem;
   background-color: #fff;
   text-transform: capitalize;
