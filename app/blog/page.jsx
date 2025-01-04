@@ -2,17 +2,63 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { client } from '@/services/graphql/client'
+import { GET_BLOG_POSTS } from '@/services/graphql/queries'
+
+const transformPosts = (posts) => {
+    return posts.map(post => {
+        const extraData = post.extraData || {};
+        return {
+            id: post.postHash,
+            title: extraData.BlogTitleSlug || '',
+            slug: extraData.BlogTitleSlug?.toLowerCase().replace(/\s+/g, '-') || '',
+            excerpt: post.body.substring(0, 150) + '...',
+            date: new Date(post.timestamp).toISOString().split('T')[0],
+            author: "Andrew",
+            readTime: "5 min read",
+            imageUrl: post.imageUrls?.[0] || null
+        };
+    });
+};
 
 export default function Page() {
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const fetchPosts = async () => {
+        const fetchPosts = async (useCache = true) => {
             try {
-                const response = await fetch('/api/blog')
-                const data = await response.json()
-                setPosts(data.posts)
+                const { data } = await client.query({
+                    query: GET_BLOG_POSTS,
+                    fetchPolicy: useCache ? 'cache-first' : 'network-only',
+                });
+                
+                const transformedPosts = transformPosts(data.posts.nodes);
+                
+                if (!useCache) {
+                    // Only update if we have new posts
+                    setPosts(prevPosts => {
+                        const newPostHashes = new Set(transformedPosts.map(p => p.id));
+                        const oldPostHashes = new Set(prevPosts.map(p => p.id));
+                        
+                        // Check if we have any new posts
+                        const hasNewPosts = transformedPosts.some(post => !oldPostHashes.has(post.id));
+                        
+                        if (hasNewPosts) {
+                            // Merge old and new posts, remove duplicates, sort by date
+                            return [...prevPosts, ...transformedPosts]
+                                .filter((post, index, self) => 
+                                    index === self.findIndex((p) => p.id === post.id)
+                                )
+                                .sort((a, b) => new Date(b.date) - new Date(a.date));
+                        }
+                        
+                        return prevPosts;
+                    });
+                } else {
+                    // Initial load from cache
+                    setPosts(transformedPosts);
+                }
             } catch (error) {
                 console.error('Error fetching blog posts:', error)
             } finally {
@@ -20,48 +66,56 @@ export default function Page() {
             }
         }
 
-        fetchPosts()
+        // Initial fetch using cache
+        fetchPosts(true);
+        
+        // Then check for new posts
+        fetchPosts(false);
+
     }, [])
 
+    if (loading) {
+        return (
+            <div className='container mx-auto px-4 max-w-6xl'>
+                <div className='mx-auto max-w-2xl w-full py-12'>
+                    <h1 className='text-4xl mb-12'>Blog</h1>
+                    <p>Loading posts...</p>
+                </div>
+            </div>
+        );
+    }
+
     return (
-        <div className='mx-auto flex w-full flex-col flex-wrap items-center md:flex-row lg:w-4/5'>
-            <div className='mx-auto max-w-2xl flex w-full flex-col items-start justify-center p-12 sm:p-0'>
-                <h1 className='text-4xl mb-12 text-left'>Blog</h1>
+        <div className='container mx-auto px-4 max-w-6xl'>
+            <div className='mx-auto max-w-2xl w-full py-12'>
+                <h1 className='text-4xl mb-12'>Blog</h1>
                 <p className='mb-8 text-2xl leading-normal'>Thoughts on Technology and Development</p>
                 
-                {loading ? (
-                    <div className='flex items-center justify-center w-full'>
-                        <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900'></div>
-                    </div>
-                ) : (
-                    <div className='w-full space-y-8'>
-                        {posts.map((post) => (
-                            <article key={post.id} className='border-b border-gray-200 pb-8'>
-                                <Link href={`/blog/${post.slug}`}>
-                                    <h2 className='text-3xl font-semibold mb-2 hover:text-blue-600 transition-colors'>
-                                        {post.title}
-                                    </h2>
+                <div className='w-full'>
+                    {posts.map((post) => (
+                        <article key={post.id} className='mb-8'>
+                            {post.imageUrl && (
+                                <img 
+                                    src={post.imageUrl} 
+                                    alt={post.title}
+                                    className="w-full h-48 object-cover rounded-lg mb-4"
+                                />
+                            )}
+                            <h2 className='text-2xl font-bold mb-2'>
+                                <Link href={`/blog/${post.slug}`} className='hover:text-blue-600'>
+                                    {post.title}
                                 </Link>
-                                <div className='flex gap-4 text-sm text-gray-600 mb-4'>
-                                    <span>{post.date}</span>
-                                    <span>•</span>
-                                    <span>{post.readTime}</span>
-                                    <span>•</span>
-                                    <span>By {post.author}</span>
-                                </div>
-                                <p className='text-gray-700 leading-relaxed'>
-                                    {post.excerpt}
-                                </p>
-                                <Link 
-                                    href={`/blog/${post.slug}`}
-                                    className='inline-block mt-4 text-blue-600 hover:text-blue-800 transition-colors'
-                                >
-                                    Read more →
-                                </Link>
-                            </article>
-                        ))}
-                    </div>
-                )}
+                            </h2>
+                            <div className='text-gray-600 mb-2'>
+                                {post.date} · {post.readTime} · {post.author}
+                            </div>
+                            <p className='text-gray-700'>{post.excerpt}</p>
+                            <Link href={`/blog/${post.slug}`} className='text-blue-600 hover:underline mt-2 inline-block'>
+                                Read more →
+                            </Link>
+                        </article>
+                    ))}
+                </div>
             </div>
         </div>
     )
