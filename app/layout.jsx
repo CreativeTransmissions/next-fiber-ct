@@ -1,5 +1,6 @@
 import { Layout } from '@/components/dom/Layout'
 import NavBar from '@/components/navigation/NavBar.jsx';
+import { roboto } from './fonts'
 
 import '@/global.css'
 import '@/globals.css'
@@ -11,7 +12,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang='en' className='antialiased'>
+    <html lang="en" className={roboto.className}>
       <meta charSet="utf-8" />
       {/*
         <head /> will contain the components returned by the nearest parent

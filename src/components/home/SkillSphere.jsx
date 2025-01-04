@@ -6,7 +6,7 @@ import { View } from '@/components/canvas/View';
 
 function Word({ children, ...props }) {
     const color = new THREE.Color()
-    const fontProps = { font: '/Roboto.woff', fontSize: 2.5, letterSpacing: -0.05, lineHeight: 1, 'material-toneMapped': false }
+    const fontProps = { fontSize: 2.5, letterSpacing: -0.05, lineHeight: 1, 'material-toneMapped': false }
     const ref = useRef()
     const [hovered, setHovered] = useState(false)
     const over = (e) => (e.stopPropagation(), setHovered(true))
