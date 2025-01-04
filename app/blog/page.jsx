@@ -12,7 +12,7 @@ const transformPosts = (posts) => {
             id: post.postHash,
             title: extraData.Title || '',
             slug: extraData.BlogTitleSlug?.toLowerCase().replace(/\s+/g, '-') || '',
-            excerpt: post.body.substring(0, 150) + '...',
+            excerpt: post.body.split('View this post at https://desocialworld')[0],
             date: new Date(post.timestamp).toISOString().split('T')[0],
             author: "Andrew",
             readTime: "5 min read",
@@ -32,27 +32,27 @@ export default function Page() {
                     query: GET_BLOG_POSTS,
                     fetchPolicy: useCache ? 'cache-first' : 'network-only',
                 });
-                
+
                 const transformedPosts = transformPosts(data.posts.nodes);
-                
+
                 if (!useCache) {
                     // Only update if we have new posts
                     setPosts(prevPosts => {
                         const newPostHashes = new Set(transformedPosts.map(p => p.id));
                         const oldPostHashes = new Set(prevPosts.map(p => p.id));
-                        
+
                         // Check if we have any new posts
                         const hasNewPosts = transformedPosts.some(post => !oldPostHashes.has(post.id));
-                        
+
                         if (hasNewPosts) {
                             // Merge old and new posts, remove duplicates, sort by date
                             return [...prevPosts, ...transformedPosts]
-                                .filter((post, index, self) => 
+                                .filter((post, index, self) =>
                                     index === self.findIndex((p) => p.id === post.id)
                                 )
                                 .sort((a, b) => new Date(b.date) - new Date(a.date));
                         }
-                        
+
                         return prevPosts;
                     });
                 } else {
@@ -68,7 +68,7 @@ export default function Page() {
 
         // Initial fetch using cache
         fetchPosts(true);
-        
+
         // Then check for new posts
         fetchPosts(false);
 
@@ -90,13 +90,13 @@ export default function Page() {
             <div className='mx-auto max-w-2xl w-full py-12'>
                 <h1 className='text-4xl mb-12'>Blog</h1>
                 <p className='mb-8 text-2xl leading-normal'>Thoughts on Technology and Development</p>
-                
+
                 <div className='w-full'>
                     {posts.map((post) => (
                         <article key={post.id} className='mb-8'>
                             {post.imageUrl && (
-                                <img 
-                                    src={post.imageUrl} 
+                                <img
+                                    src={post.imageUrl}
                                     alt={post.title}
                                     className="w-full h-48 object-cover rounded-lg mb-4"
                                 />
