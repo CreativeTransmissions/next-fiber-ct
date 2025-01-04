@@ -13,7 +13,11 @@ const transformPosts = (posts) => {
             title: extraData.Title || '',
             slug: extraData.BlogTitleSlug?.toLowerCase().replace(/\s+/g, '-') || '',
             excerpt: post.body.split('View this post at https://desocialworld')[0],
-            date: new Date(post.timestamp).toISOString().split('T')[0],
+            date: new Date(post.timestamp).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            }),
             author: "Andrew",
             readTime: "5 min read",
             imageUrl: post.imageUrls?.[0] || null
