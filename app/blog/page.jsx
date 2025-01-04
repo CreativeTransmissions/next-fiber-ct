@@ -10,7 +10,7 @@ const transformPosts = (posts) => {
         const extraData = post.extraData || {};
         return {
             id: post.postHash,
-            title: extraData.BlogTitleSlug || '',
+            title: extraData.Title || '',
             slug: extraData.BlogTitleSlug?.toLowerCase().replace(/\s+/g, '-') || '',
             excerpt: post.body.substring(0, 150) + '...',
             date: new Date(post.timestamp).toISOString().split('T')[0],
