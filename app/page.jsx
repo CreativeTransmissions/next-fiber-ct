@@ -9,6 +9,10 @@ import pageData from './homePageData.js'
 import LogoWithCaption from '@/components/home/Logo.jsx'
 import DevicesCanvas from '@/components/home/DevicesCanvas.jsx'
 import SkillSphere from '@/components/home/SkillSphere.jsx'
+import { Three } from '@/helpers/components/Three'
+import dynamic from 'next/dynamic'
+
+const Scene = dynamic(() => import('@/components/canvas/Scene'), { ssr: false })
 
 const CameraMove = () => {
   const { camera } = useThree();
@@ -67,14 +71,28 @@ const CameraAnimation = () => {
 
 export default function Page() {
   return (
-    <><SkillSphere />
-      <div className="scrollcontent" style={{ position: 'relative', zIndex: 10 }}>
-        <div className='mx-auto flex w-full flex-wrap items-center md:flex-row lg:w-4/5 pt-24'>
-          <LogoWithCaption pageData={pageData} />
+    <>
+      <div style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden' }}>
+        {/* Three.js Scene */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          zIndex: 0
+        }}>
+          <Scene />
         </div>
 
-      </div >
-
+        {/* Content */}
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <div className='mx-auto flex w-full flex-wrap items-center md:flex-row lg:w-4/5 pt-24'>
+            <LogoWithCaption pageData={pageData} />
+          </div>
+          <SkillSphere />
+        </div>
+      </div>
     </>
   )
 }
