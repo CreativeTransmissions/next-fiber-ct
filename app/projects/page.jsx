@@ -2,7 +2,6 @@
 
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
-import NavBar from '@/components/navigation/NavBar.jsx';
 
 const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
@@ -24,7 +23,7 @@ const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mo
 
 export default function Page() {
     return (
-        <><NavBar />
+        <>
             <div className='mx-auto flex w-full flex-col flex-wrap items-center md:flex-row  lg:w-4/5'>
                 {/* jumbo */}
                 <div className='flex w-full flex-col items-start justify-center p-12 text-center md:w-2/5 md:text-left'>
