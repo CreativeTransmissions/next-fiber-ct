@@ -4,6 +4,19 @@ import { useEffect, useState } from 'react'
 import { client } from '@/services/graphql/client'
 import { GET_BLOG_POSTS, GET_BLOG_POST } from '@/services/graphql/queries'
 import { notFound } from 'next/navigation'
+import dynamic from 'next/dynamic'
+
+const ReactQuill = dynamic(() => import('react-quill'), {
+    ssr: false,
+    loading: () => <p>Loading editor...</p>
+})
+
+const quillModules = {
+    toolbar: false,
+    clipboard: {
+        matchVisual: false
+    }
+};
 
 export default function BlogPost({ params }) {
     const [post, setPost] = useState(null)
@@ -20,7 +33,7 @@ export default function BlogPost({ params }) {
 
                 // Find the post in the cached list
                 const cachedPost = listData.posts.nodes.find(post => 
-                    post.extraData?.BlogTitleSlug?.toLowerCase().replace(/\s+/g, '-') === params.slug
+                    post.extraData?.Title?.toLowerCase().replace(/\s+/g, '-') === params.slug
                 );
 
                 if (cachedPost) {
@@ -34,7 +47,7 @@ export default function BlogPost({ params }) {
                     });
 
                     const freshPost = freshData.posts.nodes.find(post => 
-                        post.extraData?.BlogTitleSlug?.toLowerCase().replace(/\s+/g, '-') === params.slug
+                        post.extraData?.Title?.toLowerCase().replace(/\s+/g, '-') === params.slug
                     );
 
                     if (freshPost) {
@@ -68,8 +81,8 @@ export default function BlogPost({ params }) {
         const extraData = post.extraData || {};
         return {
             id: post.postHash,
-            title: extraData.BlogTitleSlug || '',
-            body: post.body,
+            title: extraData.Title || extraData.BlogTitleSlug || '',
+            content: extraData.BlogDeltaRtfFormat ? JSON.parse(extraData.BlogDeltaRtfFormat) : { ops: [] },
             date: new Date(post.timestamp).toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
@@ -111,13 +124,51 @@ export default function BlogPost({ params }) {
                         {post.date} · {post.readTime} · {post.author}
                     </div>
                     <div className="prose prose-lg max-w-none">
-                        {post.body.split('\n').map((paragraph, index) => (
-                            paragraph.trim() && (
-                                <p key={index} className="mb-4 text-gray-700">
-                                    {paragraph}
-                                </p>
-                            )
-                        ))}
+                        <style jsx global>{`
+                            .ql-container.ql-bubble {
+                                border: none;
+                            }
+                            .ql-editor {
+                                padding: 0;
+                            }
+                            .ql-editor p:empty,
+                            .ql-editor p:has(br:only-child),
+                            .ql-editor h3:empty,
+                            .ql-editor h3:has(br:only-child) {
+                                display: none;
+                            }
+                            .ql-editor p {
+                                margin-bottom: 1rem;
+                                color: rgb(55 65 81);
+                            }
+                            .ql-editor h3 {
+                                font-size: 1.5rem;
+                                line-height: 2rem;
+                                font-weight: 700;
+                                margin-top: 2rem;
+                                margin-bottom: 1rem;
+                            }
+                            .ql-editor ul {
+                                list-style-type: disc;
+                                padding-left: 1.5rem;
+                                margin-bottom: 1rem;
+                            }
+                            .ql-editor li {
+                                margin-bottom: 0.5rem;
+                            }
+                            .ql-editor strong {
+                                font-weight: 700;
+                            }
+                            .ql-editor em {
+                                font-style: italic;
+                            }
+                        `}</style>
+                        <ReactQuill
+                            value={post.content}
+                            readOnly={true}
+                            theme="bubble"
+                            modules={quillModules}
+                        />
                     </div>
                 </article>
             </div>
