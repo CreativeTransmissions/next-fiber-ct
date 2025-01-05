@@ -5,6 +5,26 @@ import Link from 'next/link'
 import { client } from '@/services/graphql/client'
 import { GET_BLOG_POSTS } from '@/services/graphql/queries'
 
+const transformPosts = (posts) => {
+    return posts.map(post => {
+        const extraData = post.extraData || {};
+        return {
+            id: post.postHash,
+            title: extraData.Title || '',
+            slug: extraData.BlogTitleSlug?.toLowerCase().replace(/\s+/g, '-') || '',
+            excerpt: post.body.split('View this post at https://desocialworld')[0],
+            date: new Date(post.timestamp).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            }),
+            author: "Andrew",
+            readTime: "5 min read",
+            imageUrl: post.imageUrls?.[0] || null
+        };
+    });
+};
+
 export default function BlogPostsList({ initialPosts }) {
     const [posts, setPosts] = useState(initialPosts)
 
