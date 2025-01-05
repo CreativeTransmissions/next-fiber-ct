@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 import { client } from '@/services/graphql/client'
 import { GET_BLOG_POSTS } from '@/services/graphql/queries'
 import BlogPostsList from './components/BlogPostsList'
+import { DOMAIN } from '@/config'
 
 export const revalidate = 300 // 5 minutes
 
@@ -55,6 +56,7 @@ export async function generateMetadata() {
       title: 'Blog | Thoughts on Technology and Development',
       description: 'Insights and articles about technology, development, and more.',
       type: 'website',
+      url: `${DOMAIN}/blog`,
       images: latestPost?.imageUrl ? [
         {
           url: latestPost.imageUrl,
@@ -71,9 +73,46 @@ export async function generateMetadata() {
       images: latestPost?.imageUrl ? [latestPost.imageUrl] : [],
     },
     alternates: {
-      canonical: '/blog'
+      canonical: `${DOMAIN}/blog`
     }
   }
+}
+
+export function generateViewport() {
+  return {
+    themeColor: 'white'
+  }
+}
+
+export async function generateScripts() {
+  const posts = await fetchPosts();
+  
+  return [{
+    type: 'application/ld+json',
+    innerHTML: JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Blog',
+      name: 'Blog | Thoughts on Technology and Development',
+      description: 'Insights and articles about technology, development, and more.',
+      url: `${DOMAIN}/blog`,
+      author: {
+        '@type': 'Person',
+        name: 'Andrew'
+      },
+      blogPost: posts.map(post => ({
+        '@type': 'BlogPosting',
+        headline: post.title,
+        description: post.excerpt,
+        datePublished: new Date(post.date).toISOString(),
+        image: post.imageUrl ? [post.imageUrl] : [],
+        url: `${DOMAIN}/blog/${post.slug}`,
+        author: {
+          '@type': 'Person',
+          name: 'Andrew'
+        }
+      }))
+    })
+  }];
 }
 
 export default async function Page() {

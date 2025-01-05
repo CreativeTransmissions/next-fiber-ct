@@ -10,6 +10,7 @@ const NavBar = () => {
             <nav className="flex space-x-4 md:space-x-8 lg:w-2/3 xl:w-1/2">
                 <Link href="/">Home</Link>
                 <Link href="/about">About</Link>
+                <Link href="/blog">Blog</Link>
                 <Link href="/contact">Contact</Link>
             </nav>
         </header>
